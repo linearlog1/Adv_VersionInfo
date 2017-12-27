@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=DeviceInfo
+Comment=APS-PS03 Image Version Display tool
+Exec=/usr/bin/DeviceInfo
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Application
+SingleInstance=true
+
