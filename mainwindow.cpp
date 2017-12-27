@@ -18,52 +18,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QTextStream stream(&inputFile);
     //Get bootloader version
-    QString uboot;
-    QString version_a_digit;
     if (!stream.atEnd())
     {
-        uboot = stream.readLine();
-        version_a_digit = uboot;
+        QString uboot = stream.readLine();
         uboot.prepend("Bootloader: ");
         ui->uboot->setText(uboot);
     }
 
-    //Get rootfs version (A/B/C/D)
-    QString rootfs = "Rootfs: ";
-    //Version Digit A (Bootloader Version)
-    if (!version_a_digit.compare(QString("1Gram")))
-    {
-        //1Gram Bootloader
-        rootfs.append("2");
-    }
-    else
-    {
-        //512Mram Bootloader
-        rootfs.append("1");
-    }
-    rootfs.append("_");
-
-    //Version Digit B (Build Date)
+    //Get rootfs version
     if (!stream.atEnd())
     {
-        QString version_b_digit = stream.readLine();
-        rootfs.append(version_b_digit);
+        QString rootfs = stream.readLine();
+        rootfs.prepend("Rootfs: ");
+        ui->rootfs->setText(rootfs);
     }
-    rootfs.append("_");
-
-    //Version Digit C and D
-    if (!stream.atEnd())
-    {
-        QString version_c_digit = stream.readLine();
-        rootfs.append(version_c_digit);
-    }
-    if (!stream.atEnd())
-    {
-        QString version_d_digit = stream.readLine();
-        rootfs.append(version_d_digit);
-    }
-
-    ui->rootfs->setText(rootfs);
 
     inputFile.close();
 
